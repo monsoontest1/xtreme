@@ -1,0 +1,189 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+@import
+  'variables',
+  'normalize',
+  'reset',
+  // 'fonts',
+  // 'fontawesome',
+  'base',
+  'buttons',
+  'forms',
+  'tables',
+  'structure',
+  'grid',
+  'header',
+  'headings',
+  'navigation',
+  'article',
+  'images',
+  'home',
+  'archive',
+  'product',
+  'cart',
+  'widgets',
+  'pagination',
+  'sidebar',
+  '404',
+  'subscribe',
+  'footer-widgets',
+  'footer'
+;
+
+/* Media Queries
+-------------------------------------------------- */
+/* Larger than mobile */
+// @media (min-width: 400px) {
+// }
+
+/* Larger than phablet (point when 2-column grid becomes active) */
+// @media (min-width: 550px) {
+// }
+
+/* Larger than tablet (point when 3-column grid becomes active) */
+// @media (min-width: 750px) {
+// }
+
+/* Larger than desktop (point when 4-column grid becomes active) */
+// @media (min-width: 1000px) {
+// }
+
+/* Larger than Desktop HD */
+// @media (min-width: 1200px) {
+// }
+.infinite-spinner {
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  background-color: #333;
+  margin: 60px auto;
+  
+  -webkit-animation: scaleout 1.0s infinite ease-in-out;
+  animation: scaleout 1.0s infinite ease-in-out;
+}
+
+@-webkit-keyframes scaleout {
+  0% { -webkit-transform: scale(0.0) }
+  100% {
+    -webkit-transform: scale(1.0);
+    opacity: 0;
+  }
+}
+
+@keyframes scaleout {
+  0% {
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 100% {
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+    opacity: 0;
+  }
+}
+
+/*
+.translated-ltr{margin-top:-40px;}
+.translated-ltr{margin-top:-40px;}
+.goog-te-banner-frame {display: none;margin-top:-20px;}
+
+.goog-logo-link {
+   display:none !important;
+}
+
+.goog-te-gadget{
+   color: transparent !important;
+}
+
+
+*/
+
+
+.vsection {
+  display: flex;
+  justify-content: center;
+}
+
+.vback {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+
+#original {
+  position: relative;
+  overflow: hidden;
+}
+
+.vtitle {
+  // background: yellow;
+  font-size: 20px;
+  position: absolute;
+  top: 55px;
+  left: 45px;
+  font-weight: bold;
+}
+
+.vmobile {
+  font-size: 10px;
+  position: absolute;
+  top: 143px;
+  left: 65px;
+}
+.vemail {
+  font-size: 10px;
+  position: absolute;
+  top: 170px;
+  left: 65px;
+}
+.vurl {
+  font-size: 10px;
+  position: absolute;
+  top: 198px;
+  left: 65px;
+}
+.vaddress {
+  font-size: 10px;
+  position: absolute;
+  top: 221px;
+  left: 65px;
+  max-width:130px;
+  word-wrap:break-word;
+}
+
+.vlogo {
+  position: absolute;
+  top: 130px;
+  left: 330px;
+  height: 100px;
+  width: 100px;
+}
+
+.vcontainer {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+    margin-right: 20px;
+   height: 300px;
+   width: 300px;
+}
+
+ .zoom-2 {
+	display:inline-block;
+	position: relative;
+}
+
+
+.zoom-2 img {
+	display: block;
+}
+.zoom-2 img::selection { background-color: transparent; }
+
+.zoom-2 img {
+    max-width: 500px;
+    max-height: 700px;
+    width: 100%;
+}

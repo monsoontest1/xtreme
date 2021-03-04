@@ -1,0 +1,181 @@
+---
+layout: none 
+---
+
+<!doctype html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+  
+    <title>{% if page.title %}{{ page.title }}{% endif %} | {{ site.title }}</title>
+  
+    <meta name="description" content="{% if page.description %}{{ page.description }}{% endif %}">
+  
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+    <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ site.url }}/feed.xml">
+  
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="og:title" content="{% if page.title %}{{ page.title }}{% elsif page.headline %}{{ page.headline }}{% else %}{{ site.title }}{% endif %}|{{ site.title }}">
+    <meta property="og:description" content="{% if page.description %}{{ page.description }}{% endif %}">
+    <meta property="og:image" content="{% if page.facebook_image_path %}{{ page.facebook_image_path }}{% elsif page.featured_image_path %}{{ page.featured_image_path }}{% else %}{{ site.url }}/images/default.jpg{% endif %}">
+  
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ site.url }}/js/infinite-jekyll.js"></script>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+
+    <link rel="icon" type="image/png" href="{{ site.favicon }}"/>
+    <link rel="apple-touch-icon" sizes="192x192" href="{{ site.favicon }}">
+    <link rel="manifest" href="{{ site.url }}/manifest.json">
+
+    <script src="{{ site.url }}/js/sw-reg.js"></script>
+    <script src="{{ site.url }}/js/pwa-app.js"></script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Martel:200,700,900|Open+Sans:400,700|Roboto+Condensed:700">
+    <link rel="stylesheet" href="{{ site.url }}/css/main.css">
+    <!-- Font Awesome -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.0.0/mdb.min.css"
+    rel="stylesheet"
+    />
+  </head>
+
+  <body {% if page.url == '/' %}class="home{% if page.sidebar_option != 'sidebar' %} full-width-content{% endif %}" {% elsif page.url contains '/blog/' or page.layout == 'archive' %}class="archive full-width-content" {% elsif page.url contains '/products/' %}class="product" {% elsif page.sidebar_option != 'sidebar' %}class="full-width-content" {% endif %}itemscope itemtype="http://schema.org/WebPage">
+
+    <div class="site-container">
+
+      <!--[if lte IE 9]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+      <![endif]-->
+
+      <header class="site-header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="wrap">
+      
+          <div class="title-area">
+            <h1 class="site-title" itemprop="headline"><a href="{{ site.url }}/">{{ site.title }}</a></h1>
+          </div>
+      
+          <nav class="nav-primary" itemscope itemtype="http://schema.org/SiteNavigationElement" aria-label="Main navigation">
+            <ul class="monsoon-nav-menu">
+		   <li class="menu-item pwa active"> <a href="#" onclick="addToHomeScreen()" class="">Install App</a></li>          
+		   <li class="menu-item active"> <a href="{{ site.url }}/blog" class="">Blog</a></li>          
+              {% for menu-item in site.data.navigation %}
+          
+                <li class="menu-item{% if menu-item.url == page.url %} active{% endif %}">
+                  <a href="{{ site.url }}{{ menu-item.url }}">{{ menu-item.title }}</a>
+          
+                  {% if menu-item.sub-menu-items %}
+                  <ul class="sub-menu">
+          
+                    {% for sub-menu-item in menu-item.sub-menu-items %}
+                      <li class="menu-item"><a href="{{ site.url }}{{ sub-menu-item.url }}">{{ sub-menu-item.title }}</a></li>
+                    {% endfor %}
+          
+                  </ul>
+                  {% endif %}
+          
+                </li>
+          
+              {% endfor %}
+          
+              <li class="menu-item cart{% if page.url == '/cart/' %} active{% endif %}">
+                <a class="btn btn-warning px-4" href="{{ site.url }}/cart/" id="cart-menu">Cart <span class="fa fa-shopping-cart"></span> (<span class="simpleCart_quantity"></span>)</a>
+              </li>
+          
+            </ul>
+          </nav>
+      
+          <nav class="nav-secondary mobile-show" itemscope itemtype="http://schema.org/SiteNavigationElement" aria-label="Secondary navigation">
+            <ul class="monsoon-nav-menu">
+              <li class="menu-item">
+                <a href="{{ site.url }}/cart/" id="cart-menu">Cart <span class="fa fa-shopping-cart"></span> (<span class="simpleCart_quantity"></span>)</a>
+              </li>
+            </ul>
+          </nav>
+      
+        </div>
+      </header>
+
+      {{ content }}
+      <div class="text-center my-3">
+	      <!--	<div id="google_translate_element"></div> -->
+	<a href="#" onclick="addToHomeScreen()" class="btn btn-info pwa">Install App</a>
+	<a href="{{ site.url }}/blog" class="btn btn-info">Blog</a>
+	<a href="{{ site.url }}/" class="btn btn-info">Go Home</a>
+	<p class="pwa my-2 alert alert-info">Note: Install App button only works in chrome browser. So update your chrome and open this site in google chrome browser</p>
+      </div>
+
+      <!--      <div class="text-center">  <a href="#" onclick="addToHomeScreen()" class="btn btn-warning me-2 my-2 rounded-pill" type="button">App</a> </div> -->
+      <div style="width: 100%"><iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q={{ site.location }}+(Your%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe><p class="alert alert-info">Click on "view larger map" to get direction</p>
+      </div></div>
+    <script>
+	const url = new URL(window.location.href);
+const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+//  	if(url.searchParams.get('mode')=='standalone'){
+ if (navigator.standalone || isStandalone) {
+		console.log('it works');
+	Array.from(
+    document.getElementsByClassName("pwa")
+).forEach((e)=>e.style.display='none')
+	}
+    </script>
+    <script src="{{ site.url }}/js/simpleCart.js"></script>
+    <script async src="{{ site.url }}/js/main.js"></script>
+    <script async src="{{ site.url }}/js/responsive-menu.js"></script>
+    <!-- MDB -->
+    <script
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.0.0/mdb.min.js"
+    ></script>
+    {% if page.url contains '/products/' %}
+      <script async src="{{ site.url }}/js/style-picker.js"></script>
+      <script async src="{{ site.url }}/js/add-to-cart.js"></script>
+    {% endif %}
+
+    {% if page.url == '/cart/' %}
+      <script async src="{{ site.url }}/js/checkout.js"></script>
+    {% endif %}
+    {% if page.url == '/cart/' %}
+    <script async src="{{ site.url }}/js/checkout_whatsapp.js"></script>
+    {% endif %}
+
+<!--    <script>
+	// Custom Scripts
+
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+}
+
+
+// Minified Scripts
+(function(){var gtConstEvalStartTime = new Date();/*
+
+ Copyright The Closure Library Authors.
+ SPDX-License-Identifier: Apache-2.0
+*/
+function d(b){var a=document.getElementsByTagName("head")[0];a||(a=document.body.parentNode.appendChild(document.createElement("head")));a.appendChild(b)}function _loadJs(b){var a=document.createElement("script");a.type="text/javascript";a.charset="UTF-8";a.src=b;d(a)}function _loadCss(b){var a=document.createElement("link");a.type="text/css";a.rel="stylesheet";a.charset="UTF-8";a.href=b;d(a)}function _isNS(b){b=b.split(".");for(var a=window,c=0;c<b.length;++c)if(!(a=a[b[c]]))return!1;return!0}
+function _setupNS(b){b=b.split(".");for(var a=window,c=0;c<b.length;++c)a.hasOwnProperty?a.hasOwnProperty(b[c])?a=a[b[c]]:a=a[b[c]]={}:a=a[b[c]]||(a[b[c]]={});return a}window.addEventListener&&"undefined"==typeof document.readyState&&window.addEventListener("DOMContentLoaded",function(){document.readyState="complete"},!1);
+if (_isNS('google.translate.Element')){return}(function(){var c=_setupNS('google.translate._const');c._cest = gtConstEvalStartTime;gtConstEvalStartTime = undefined;c._cl='en';c._cuc='googleTranslateElementInit';c._cac='';c._cam='';c._ctkk='440335.1449305758';var h='translate.googleapis.com';var s=(true?'https':window.location.protocol=='https:'?'https':'http')+'://';var b=s+h;c._pah=h;c._pas=s;c._pbi=b+'/translate_static/img/te_bk.gif';c._pci=b+'/translate_static/img/te_ctrl3.gif';c._pli=b+'/translate_static/img/loading.gif';c._plla=h+'/translate_a/l';c._pmi=b+'/translate_static/img/mini_google.png';c._ps=b+'/translate_static/css/translateelement.css';c._puh='translate.google.com';_loadCss(c._ps);_loadJs(b+'/translate_static/js/element/main.js');})();})();
+
+    </script> -->
+  </body>
+
+</html>

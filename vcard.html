@@ -1,0 +1,38 @@
+---
+title: Visiting Card
+sitemap: false
+layout: default
+---
+
+
+<section class="vsection">
+    <div id="original" class="container">
+      <img class="vback" src="{{ site.url}}/1214.png" />
+     <p class="vtitle">{{ site.title }}</p>
+     <p class="vmobile">{{ site.mobile }}</p>
+     <p class="vemail">{{ site.email }}</p>
+     <p class="vurl">{{ site.url }}</p>
+     <p class="vaddress">{{ site.address }}</p>
+     <img class="vlogo" src="{{ site.favicon }}" />
+    </div>
+    <div class="container" id="canvas-container">
+    </div> 
+    <button onclick="convert()">Convert</button>
+  </section>
+
+  <script>
+      function convert() {
+  const original = document.querySelector('#original')
+  const canvasContainer = document.querySelector('#canvas-container')
+
+html2canvas(original, {
+   scale: 2,
+   useCORS: true,
+ }).then(canvas => {
+  canvasContainer.appendChild(canvas)
+})
+}
+
+  </script>
+
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>

@@ -1,0 +1,66 @@
+---
+layout: default
+---
+
+<div class="site-inner">
+  <div class="wrap">
+    <div class="content-sidebar-wrap">
+
+      <main class="content single-product simpleCart_shelfItem" itemscope itemtype="http://schema.org/Product">
+
+        <section class="product-image">
+          <div class="styles">
+            {% for style in page.styles %}
+          		<div id="product-{{ forloop.index }}" class="style" {% unless forloop.first %}style="display: none"{% endunless %}>
+        				<span class="zoom-2"><img width="100%" height="400" src="{{ style.image_path }}" itemprop="image"></span>
+          		</div>
+          	{% endfor %}
+          </div>
+	  <div class="style-picker">
+            {% for style in page.styles %}
+              <div id="product-{{ forloop.index }}"{% if forloop.first %} class="item_color"{% endif %} style="background-color: {{ style.color }}"><span class="display-none">{{ style.name }}</span></div>
+            {% endfor %}
+        	</div>
+
+        </section>
+
+        <section class="product-details">
+          <h1 class="entry-title item_name" itemprop="name">{{ page.title }}</h1>
+	  <p class="item_price">{{ page.price }}</p>
+	  <p> per {{ page.quantity }} {{ page.unit }}</p> 
+	  	  {{ content }}
+
+         <!--  <p class="margin-bottom-0">Size:</p>
+          <select class="item_size">
+            {% for size in page.sizes %}
+              <option value="{{ size }}"> {{ size }} </option>
+            {% endfor %}
+	  </select> -->
+
+          <p class="margin-bottom-0">How many packs:</p>
+          <select class="item_Quantity">
+            <option value="1"> 1 </option>
+            <option value="2"> 2 </option>
+            <option value="3"> 3 </option>
+            <option value="4"> 4 </option>
+            <option value="5"> 5 </option>
+            <option value="6"> 6 </option>
+            <option value="7"> 7 </option>
+            <option value="8"> 8 </option>
+          </select>
+
+          <a id="item_add" class="item_add btn btn-info my-2" href="javascript:;"> Add to Cart </a></span>
+        </section>
+
+      </main>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function(){
+ $('.zoom-2').zoom();
+});
+</script>
+<script src="{{ site.url }}/js/s.min.js"></script>

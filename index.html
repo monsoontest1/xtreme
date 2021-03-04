@@ -1,0 +1,62 @@
+---
+title: Home
+layout: default
+---
+
+
+<div class="site-inner">
+  <div class="wrap">
+    <div class="">
+
+      <main class="content grid">
+        {% for product in paginator.posts %}
+          <section class="entry one-third styles" itemscope itemtype="http://schema.org/Product">
+
+        		<div class="style">
+        			<a href="{{ site.url }}{{ product.url }}">
+        				<img width="100%" height="400" src="{{ product.featured_image_path }}" itemprop="image">
+        			</a>
+        		</div>
+
+            <div class="product-details">
+              <div class="product-name">
+			          <h4><a href="{{ site.url }}{{ product.url }}">{{ product.title }}</a></h4>
+              </div>
+              <div class="product-price">
+							  <p>&#x20B9;{{ product.price }}/{{ product.quantity }} {{ product.unit }}</p>
+              </div>
+						</div>
+
+          </section>
+        {% endfor %}
+
+
+
+	<!-- Pagination links -->
+    {% if paginator.total_pages > 1 %}
+    <div class="archive-pagination pagination">
+      <ul>
+      {% if paginator.previous_page %}
+        <li><a href="{{ site.url }}{{ paginator.previous_page_path | replace: '//', '/' }}">&laquo; Prev Page</a></li>
+        {% endif %} {% for page in (1..paginator.total_pages) %} {% if page == paginator.page %}
+        <li class="active">{{ page }}</li>
+        {% elsif page == 1 %}
+        <li><a href="{{ site.url }}/blog/">{{ page }}</a></li>
+        {% else %}
+        <li><a href="{{ site.paginate_path | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a></li>
+        {% endif %} {% endfor %} {% if paginator.next_page %}
+        <li><a href="{{ site.url }}{{ paginator.next_page_path | replace: '//', '/' }}">Next Page &raquo;</a></li>
+      {% endif %}
+      </ul>
+    </div>
+    {% endif %}
+
+
+
+
+      </main>
+
+
+    </div>
+  </div>
+</div>
